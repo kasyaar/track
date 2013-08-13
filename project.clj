@@ -7,5 +7,5 @@
   :aot [jete-track.core]
   :dependencies [
                  [http-kit "2.1.5"]
-                 [octohipster "0.2.1-SNAPSHOT"]
+                 [compojure "1.1.5"]
                  [org.clojure/clojure "1.5.1"]])

@@ -1,24 +1,17 @@
 (ns jete-track.core
   (:use 
-    [octohipster core routes mixins]
-    [octohipster.documenters swagger]
+    compojure.core
+    [compojure.handler :only [site]]
     org.httpkit.server)
   (:require 
-    [liberator.core :as lib]
-    [ring.util.response :as resputil]))
+    [compojure.route :as route]
+    [ring.util.response :as response]))
 
+(defn pixel "doc-string" [request]
+  (response/redirect "http://google.com"))
 
-(defresource pixel-handler
-  :desc "Handle tracking pixel"
-  :url "/pixel"
-  :mixins [handled-resource]
-  :post-redirect? true
-  :exists? (fn [ctx] (println (str (:request ctx))) {:location "EBA!"}))
+(defroutes  all-routes
+  (GET "/pixel" [] pixel)
+  (route/not-found "<p>Page not found</p>"))
 
-(defgroup root-group
-  :resources [pixel-handler])
-
-(defroutes site
-  :groups [root-group])
-
-(defn -main [] (run-server site {:port 8080}))
+(defn -main [] (run-server (site #'all-routes) {:port 8080}))
