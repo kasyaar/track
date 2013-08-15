@@ -1,6 +1,6 @@
-(ns jete-track.core-test
+(ns track.core-test
   (:use clojure.test
-        jete-track.core))
+        track.core))
 
 (deftest a-test
   (testing "FIXME, I fail."

@@ -1,4 +1,4 @@
-(ns jete-track.core
+(ns track.core
   (:use 
     compojure.core
     [compojure.handler :only [site]]
