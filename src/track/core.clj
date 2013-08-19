@@ -46,4 +46,4 @@
   (route/files "/")
   (route/not-found "<p>Page not found</p>"))
 
-(defn -main [] (run-server (site #'all-routes) {:port 8080}))
+(defn -main [port] (run-server (site #'all-routes) {:port (Integer. port)}))
