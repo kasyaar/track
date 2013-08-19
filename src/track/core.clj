@@ -12,8 +12,6 @@
 (def mq-client (mq/create-client 
                  "cUEBGXGmRpcia3iLhKuE6cFJwtY" "520b0dea7347e7000500000b"))
 ; HANDLERS
-(defn pixel "doc-string" [request]
-  (response/redirect "http://google.com"))
 
 (defn click "redirects if landing presented" [request]
   (if-let [landing (:landing (:params request))]
@@ -38,7 +36,7 @@
   (mq/post-message mq-client "pixel" (str request))
   ; TODO:
   ; add cookie set
-  (response/redirect "/img/pixel.png"))
+  (response/header (response/redirect "/img/pixel.png") "Cache-control" "no-cache"))
 
 (defroutes  all-routes
   (GET "/click" [] (wrap-params (wrap-keyword-params click)))

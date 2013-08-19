@@ -3,8 +3,8 @@
   :url "http://www.jeteproject.com"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  ; :main track.core
-  ; :aot [track.core]
+  :main track.core
+  :aot [track.core]
   :uberjar-name "track.jar"
   :dependencies [
                  [org.clojure/clojure "1.5.1"]
