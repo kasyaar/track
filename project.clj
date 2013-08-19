@@ -6,6 +6,7 @@
   :main track.core
   :aot [track.core]
   :dependencies [
+                 [iron_mq_clojure "1.0.3"]
                  [http-kit "2.1.5"]
                  [compojure "1.1.5"]
                  [org.clojure/clojure "1.5.1"]])
