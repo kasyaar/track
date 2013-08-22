@@ -13,23 +13,21 @@
                  "cUEBGXGmRpcia3iLhKuE6cFJwtY" "520b0dea7347e7000500000b"))
 ; HANDLERS
 
-(defn click "redirects if landing presented" [request]
-  (if-let [landing (:landing (:params request))]
-    (response/redirect landing)
-    (response/status (response/response "landing requred") 400)))
 ; /click?landing=
 ; /pixel
 ; /pixel.png
 ; ? /pixel.js
+(defn log-click "log click" [landing request]
+    (mq/post-message mq-client "click" (str request))
+    (response/redirect landing))
+
 (defn click "redirects if landing presented" [request]
-  (if-let [landing (:landing (:params request))]
-    ((mq/post-message mq-client "click" (str landing))
+  (if-let [landing (str (:landing (:params request)))]
     ; TODO: 
     ; add url check
     ; extract any possible info from headers
     ; add log event and log any possible info from headers
-    
-    (response/redirect landing))
+    (log-click landing request)
     (response/status (response/response "landing requred") 400)))
 
 (defn pixel "doc-string" [request]
