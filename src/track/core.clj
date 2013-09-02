@@ -1,6 +1,7 @@
 (ns track.core
   (:use 
     compojure.core
+    track.geodata
     [compojure.handler :only [site]]
     ring.middleware.params
     ring.middleware.keyword-params
@@ -17,9 +18,16 @@
 ; /pixel
 ; /pixel.png
 ; ? /pixel.js
-(defn log-click "log click" [landing request]
-    (mq/post-message mq-client "click" (str request))
-    (response/redirect landing))
+(defn log-request [request queue]
+  (let [
+        remote-addr (:remote-addr request)
+        geodata (get-geodata remote-addr)
+        data (merge geodata request)]
+    (mq/post-message mq-client queue (str data))))
+
+(defn perform-click "log click" [landing request]
+  (log-request request "click")
+  (response/redirect landing))
 
 (defn click "redirects if landing presented" [request]
   (if-let [landing (str (:landing (:params request)))]
@@ -27,11 +35,11 @@
     ; add url check
     ; extract any possible info from headers
     ; add log event and log any possible info from headers
-    (log-click landing request)
+    (perform-click landing request)
     (response/status (response/response "landing requred") 400)))
 
 (defn pixel "doc-string" [request]
-  (mq/post-message mq-client "pixel" (str request))
+  (log-request request "pixel")
   ; TODO:
   ; add cookie set
   (response/header (response/redirect "/img/pixel.png") "Cache-control" "no-cache"))

@@ -7,8 +7,10 @@
   :aot [track.core]
   :uberjar-name "track.jar"
   :dependencies [
+                 [com.maxmind.geoip2/geoip2 "0.4.1"]
                  [org.clojure/clojure "1.5.1"]
                  [iron_mq_clojure "1.0.3"]
                  [http-kit "2.1.5"]
                  [compojure "1.1.5"]]
+  :resource-paths ["resources"]
   :min-lein-version "2.0.0")
