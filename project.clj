@@ -12,5 +12,5 @@
                  [iron_mq_clojure "1.0.3"]
                  [http-kit "2.1.5"]
                  [compojure "1.1.5"]]
-  :resource-paths ["resources"]
+  ; :resource-paths ["resources"]
   :min-lein-version "2.0.0")

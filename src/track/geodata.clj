@@ -1,10 +1,14 @@
 (ns track.geodata
   (:import
     java.io.File
+    java.net.URI
+    java.net.URL
     com.maxmind.geoip2.DatabaseReader
     java.net.InetAddress)
+  (:require [clojure.java.io :as  io])
   )
-(def mmdbreader (DatabaseReader. (File. (.getFile (clojure.java.io/resource "GeoLite2-City.mmdb")))))
+; (def mmdbreader (DatabaseReader. (File. (.getFile (io/resource "GeoLite2-City.mmdb")))))
+(def mmdbreader (DatabaseReader. (File. (.getFile (io/resource "geodata.mmdb")))))
 
 (defn get-geodata "doc-string" [ip-addr]
   (try
