@@ -14,5 +14,5 @@
   (try
     (let [dt (.city mmdbreader (InetAddress/getByName ip-addr))]
       {:geodata {:city  (.getName (.getCity dt)) :country (.getName (.getCountry dt)) :country-code (.getIsoCode (.getCountry dt)) 
-       :lat (.getLatitlude (.getLocation dt)) :lon (.getLongitude (.getLocation dt))}})
+       :lat (.getLatitude (.getLocation dt)) :lon (.getLongitude (.getLocation dt))}})
     (catch Exception e {:geodata {:geodata-error (.getMessage e)}})))
