@@ -13,5 +13,6 @@
 (defn get-geodata "doc-string" [ip-addr]
   (try
     (let [dt (.city mmdbreader (InetAddress/getByName ip-addr))]
-      {:city  (.getName (.getCity dt)) :country (.getName (.getCountry dt)) :country-code (.getIsoCode (.getCountry dt))})
-    (catch Exception e {:geodata-error (.getMessage e)})))
+      {:geodata {:city  (.getName (.getCity dt)) :country (.getName (.getCountry dt)) :country-code (.getIsoCode (.getCountry dt)) 
+       :lat (.getLatitlude (.getLocation dt)) :lon (.getLongitude (.getLocation dt))}})
+    (catch Exception e {:geodata {:geodata-error (.getMessage e)}})))
