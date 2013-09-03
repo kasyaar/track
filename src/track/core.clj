@@ -48,6 +48,7 @@
 (defroutes  all-routes
   (GET "/click" [] (wrap-params (wrap-keyword-params click)))
   (GET "/pixel" [] (wrap-params pixel))
+
   (route/files "/")
   (route/not-found "<p>Page not found</p>"))
 
