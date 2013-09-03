@@ -8,7 +8,7 @@
   (:require [clojure.java.io :as  io])
   )
 ; (def mmdbreader (DatabaseReader. (File. (.getFile (io/resource "GeoLite2-City.mmdb")))))
-(def mmdbreader (DatabaseReader. (File. (.getFile (io/resource "geodata.mmdb")))))
+(def mmdbreader (DatabaseReader. (-> "geodata.mmdb" io/resource io/file)))
 
 (defn get-geodata "doc-string" [ip-addr]
   (try

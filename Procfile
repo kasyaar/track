@@ -1,1 +1,1 @@
-web: lein run -m track.core $PORT
+web: lein run $PORT

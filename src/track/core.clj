@@ -1,4 +1,5 @@
 (ns track.core
+  (:gen-class)
   (:use 
     compojure.core
     track.geodata
