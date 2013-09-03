@@ -7,6 +7,7 @@
   :aot [track.core]
   :uberjar-name "track.jar"
   :dependencies [
+                 [org.clojure/data.csv "LATEST"]
                  [com.maxmind.geoip2/geoip2 "0.4.1"]
                  [org.clojure/clojure "1.5.1"]
                  [iron_mq_clojure "1.0.3"]
