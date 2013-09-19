@@ -26,17 +26,15 @@
         data (merge geodata request)]
     (mq/post-message mq-client queue (str data))))
 
-(defn perform-click "log click" [landing request]
-  (log-request request "click")
-  (response/redirect landing))
-
 (defn click "redirects if landing presented" [request]
-  (if-let [landing (str (:landing (:params request)))]
+  (if-let [landing (:landing (:params request))]
     ; TODO: 
     ; add url check
     ; extract any possible info from headers
     ; add log event and log any possible info from headers
-    (perform-click landing request)
+    (do
+      (log-request request "click")
+      (response/redirect (str landing)))
     (response/status (response/response "landing requred") 400)))
 
 (defn pixel "doc-string" [request]
